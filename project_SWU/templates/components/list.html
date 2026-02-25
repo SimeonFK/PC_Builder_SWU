@@ -1,0 +1,30 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<h1>Components</h1>
+
+<a href="{% url 'components:create' %}" class="btn btn-primary mb-3">
+    Add Component
+</a>
+
+<form method="get" class="mb-3">
+    <select name="order">
+        <option value="">Sort by price</option>
+        <option value="price">Lowest first</option>
+        <option value="-price">Highest first</option>
+    </select>
+    <button type="submit">Apply</button>
+</form>
+
+<ul>
+    {% for component in components %}
+        <li>
+            <a href="{% url 'components:detail' component.pk %}">
+                {{ component.brand }} – {{ component.category.name }} – {{ component.price }} $
+            </a>
+        </li>
+    {% empty %}
+        <li>No components found.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<h2>{{ component.brand }}</h2>
+
+<p><strong>Category:</strong> {{ component.category.name }}</p>
+<p><strong>Price:</strong> {{ component.price }} $</p>
+
+{% if component.image %}
+    <img src="{{ component.image }}" alt="{{ component.image}}" width="300">
+{% endif %}
+
+<p>
+    <strong>Tags:</strong>
+    {% for tag in component.tags.all %}
+        {{ tag.name }}
+    {% empty %}
+        No tags
+    {% endfor %}
+</p>
+
+<a href="{% url 'components:edit' component.pk %}" class="btn btn-warning">Edit</a>
+<a href="{% url 'components:delete' component.pk %}" class="btn btn-danger">Delete</a>
+<a href="{% url 'components:list' %}">Back</a>
+{% endblock %}
